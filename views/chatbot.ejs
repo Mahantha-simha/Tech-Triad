@@ -1,0 +1,97 @@
+<%- include('partials/header') %>
+<style>
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.chat-container {
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#chat-box {
+  height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #fff;
+}
+
+input {
+  width: 70%;
+  padding: 10px;
+  border: none;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+button {
+  width: 30%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+</style>
+
+    
+
+<div class="chat-container">
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ <script>
+    function appendMessage(sender, message) {
+  $('#chat-box').append(`<div><strong>${sender}:</strong> ${message}</div>`);
+  $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
+}
+
+function sendMessage() {
+  const userMessage = $('#user-input').val();
+
+  if (userMessage.trim() !== '') {
+    appendMessage('You', userMessage);
+
+    // Send user message to the server
+    $.post('/chat', { message: userMessage }, (data) => {
+      const botResponse = data.message;
+      appendMessage('Bot', botResponse);
+    });
+
+    // Clear the user input
+    $('#user-input').val('');
+  }
+}
+
+// Handle Enter key press
+$('#user-input').keypress((e) => {
+  if (e.which === 13) {
+    sendMessage();
+  }
+})
+ </script>
+
+
+
+
+
+
+
+<%- include('partials/footer') %>

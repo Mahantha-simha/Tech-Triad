@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+  <h1>Enter admin code</h1>
+
+  
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+
+          <!-- Makes POST request to /login route -->
+          <form action="/admincode" method="POST">
+           
+            <div class="form-group">
+              <label for="admincode">Admincode</label>
+              <input type="text" class="form-control" name="admincode">
+            </div>
+            <button type="submit" class="btn btn-dark">next</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+<%- include('partials/footer') %>

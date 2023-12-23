@@ -1,0 +1,83 @@
+
+<%- include('partials/header') %>
+
+
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+   </style>
+
+
+    <div class="container">
+        <h1>Timetable Upload</h1>
+
+        <form id="timetableForm" enctype="multipart/form-data">
+            <label for="fileInput">Choose Timetable File:</label>
+            <input type="file" id="fileInput" accept=".doc, .docx, .pdf, .xls, .xlsx, .csv" required>
+            <br>
+            <button type="button" onclick="uploadTimetable()">Upload</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script >
+   
+   function uploadTimetable() {
+    const fileInput = document.getElementById('fileInput');
+    const resultDiv = document.getElementById('result');
+
+    const file = fileInput.files[0];
+    if (file) {
+        // Display a link for downloading the uploaded file
+        resultDiv.innerHTML = `<a href="#" id="downloadLink" download="${file.name}">Download Uploaded File</a>`;
+
+        // Create a Blob from the file content
+        const blob = new Blob([file], { type: file.type });
+
+        // Set the href attribute of the download link
+        const downloadLink = document.getElementById('downloadLink');
+        downloadLink.href = URL.createObjectURL(blob);
+    } else {
+        resultDiv.innerHTML = `<p>Please choose a file.</p>`;
+    }
+}
+
+
+
+</script>
+
+
+
+
+
+
+<%- include('partials/footer') %>

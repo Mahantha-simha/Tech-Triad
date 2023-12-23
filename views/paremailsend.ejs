@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+    <h1></h1>
+  
+    
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="card-body">
+  
+            <!-- Makes POST request to /login route -->
+            <form action="/paremailsend" method="POST">
+              
+              <div class="form-group">
+                <label for="">type mail to send</label>
+                <textarea class="form-control" name="mailstd" id="" cols="30" rows="10"></textarea>
+                <!-- <input type="text" class="form-control" name="mailstd"> -->
+              </div>
+              <button type="submit" class="btn btn-dark">send</button>
+            </form>
+  
+          </div>
+        </div>
+      </div>
+  
+      
+  </div>
+
+
+
+
+
+
+<%- include('partials/footer') %>
